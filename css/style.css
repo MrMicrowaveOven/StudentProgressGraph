@@ -1,0 +1,79 @@
+body {
+  position: relative;
+  font-size: x-large;
+  font-family: 'Slabo 27px', serif;
+  letter-spacing: .5px;
+  margin: 60px auto;
+  min-height: 500px;
+  width: 720px;
+  background-color: rgba(119, 136, 153, 0.75);;
+  padding: 30px;
+}
+
+html {
+  background-image: url("../background.png");
+  background-size: 1700px
+}
+
+#portfolioLinks {
+  position: absolute;
+  bottom: 0;
+  font-size: large;
+  padding: 15px 0px 20px 0px;
+}
+
+
+.inheritFont {
+  font-size: inherit;
+  font-family: inherit;
+  letter-spacing: inherit;
+}
+
+.button {
+  margin: 3px;
+  background-color: rgba(150, 120, 120, 1);
+  padding: 5px 12px;
+  border-radius: 5px;
+  transition-duration: .4s;
+}
+
+.button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button:disabled {
+  pointer-events: none;
+}
+
+.field {
+  padding: 5px;
+  width: 380px;
+  display: flex;
+  justify-content: center;
+}
+
+.field, .response {
+  margin: 5px;
+}
+
+.response {
+  width: 430px;
+  text-align: center;
+}
+
+.dropdown {
+  border: 1px solid #ccc;
+  color: black;
+  background: lightgrey;
+}
+
+.application {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description {
+  padding: 123px 70px 0px 70px;
+  text-align: center;
+}
