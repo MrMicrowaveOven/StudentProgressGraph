@@ -1,3 +1,3 @@
-# EasyExcelObject
+# AppSkeleton
 
-This is intended to make it easier to convert data from an Excel spreadsheet into a JSON.
+This is a skeleton that I like to use to pump out quick and simple applications.  This way most of the formatting is already done.
