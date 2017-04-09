@@ -77,3 +77,15 @@ html {
   padding: 123px 70px 0px 70px;
   text-align: center;
 }
+
+.hide {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.inlineText {
+  display: inline-block;
+}
