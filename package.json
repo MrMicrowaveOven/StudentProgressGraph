@@ -9,7 +9,9 @@
   "author": "Benjamin Zagorski",
   "license": "ISC",
   "dependencies": {
+    "c3": "^0.4.12",
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "requirejs": "^2.3.3"
   }
 }

@@ -6,7 +6,7 @@ body {
   margin: 60px auto;
   min-height: 500px;
   width: 720px;
-  background-color: rgba(119, 136, 153, 0.75);;
+  background-color: rgba(119, 136, 153, 0.9);;
   padding: 30px;
 }
 
@@ -74,7 +74,7 @@ html {
 }
 
 .description {
-  padding: 123px 70px 0px 70px;
+  padding: 10px 70px 0px 70px;
   text-align: center;
 }
 
