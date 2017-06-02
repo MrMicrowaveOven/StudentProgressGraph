@@ -2,6 +2,8 @@
 
 Just a simple project working with the National Centers for Environmental Information API.
 
+Click [here](https://mrmicrowaveoven.github.io/ClimateChangeGraph/) to see the live project.
+
 This was made using the https://www.ncdc.noaa.gov api, with a C3 graphing library.
 
 ## Difficulties I Encountered
