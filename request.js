@@ -1,6 +1,6 @@
 $.ajax({
   type: "GET",
-  url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&stationid=GHCND:USC00040232&startdate=2017-04-15&enddate=2017-05-10&limit=1000",
+  url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&stationid=GHCND:USC00040232&startdate=2017-01-30&enddate=2017-04-30&limit=1000",
   beforeSend: function(xhr){xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');},
   success: function (res) {
     // console.log("Success!");
@@ -22,7 +22,6 @@ function makeArraysOfData(data) {
   var dates = [];
   var minTemps = [];
   var maxTemps = [];
-  dates.push(data[0].date);
   data.forEach(function(dataPoint) {
     // console.log(dataPoint);
     if (dataPoint.datatype == "TMAX") {
@@ -35,10 +34,12 @@ function makeArraysOfData(data) {
       // currentDateObject["date"] = dataPoint.date;
     }
     if (currentDate !== dataPoint.date) {
-      dates.push(currentDate);
+      dates.push(currentDate.slice(0,4) + currentDate.slice(5,7) + currentDate.slice(8,10));
       currentDate = dataPoint.date;
     }
   });
+  dates.push(data[data.length - 1].date.slice(0,4) + data[data.length - 1].date.slice(5,7) + data[data.length - 1].date.slice(8,10));
+  // console.log(parsedData.dates);
   parsedData = {
     dates: dates,
     minTemps: minTemps,
