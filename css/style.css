@@ -3,9 +3,9 @@ body {
   font-size: x-large;
   font-family: 'Slabo 27px', serif;
   letter-spacing: .5px;
-  margin: 60px auto;
+  margin: 40px auto;
   min-height: 650px;
-  width: 720px;
+  width: 770px;
   background-color: rgba(119, 136, 153, 0.9);;
   padding: 30px;
 }
@@ -65,6 +65,11 @@ html {
   border: 1px solid #ccc;
   color: black;
   background: lightgrey;
+}
+
+svg {
+  border: black;
+  border-style: double;
 }
 
 .application {
