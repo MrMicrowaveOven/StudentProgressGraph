@@ -15,7 +15,7 @@ function refreshGraph() {
   $("#response").removeClass("invisible");
   $.ajax({
     type: "GET",
-    url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&"
+    url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?units=standard&datasetid=GHCND&"
       + "stationid=" + stationId + "&"
       + "startdate=" + startDate + "&"
       + "enddate=" + endDate + "&limit=1000",
