@@ -20,6 +20,14 @@ function makeGraph(data) {
       bindto: '#chart',
       data: {
         columns: dataArray
+      },
+      axis: {
+        y: {
+          label: { // ADD
+            text: 'Temperature',
+            position: 'outer-middle'
+          }
+        },
       }
     });
   // });
