@@ -20,13 +20,20 @@
     </div>
     <div class="application">
       <label>Start Date:
-        <input type="date" name="" value="" id="startDate">
+        <input class="graph-input" type="date" name="" value="" id="startDate">
       </label>
       <label>End Date:
-        <input type="date" name="" value="" id="endDate">
+        <input class="graph-input" type="date" name="" value="" id="endDate">
       </label>
       <label>Station:
-        <select class="dropdown" name="" id="stationDropdown">
+        <select class="dropdown graph-input" name="" id="stationDropdown">
+        </select>
+      </label>
+      <label>Units:
+        <select class="dropdown graph-input" name="" id="unitsDropdown">
+          <option value="standard" selected="selected">Fahrenheit</option>
+          <option value="metric">Celsius</option>
+          <!-- <option value="K">Kelvin</option> -->
         </select>
       </label>
       <!-- <label class="field">Empty field
@@ -34,7 +41,7 @@
 
       <button class="button inheritFont">Blank button</button> -->
       <div class="response invisible" id="response">Loading...</div>
-      <div class="response invisible" id="errorDisplay">Sorry, no data was found for that location.</div>
+      <div class="response invisible" id="errorDisplay">Sorry, no data was found for that location during that range.</div>
       <div class="" id="chart">
       </div>
     </div>

@@ -1,7 +1,4 @@
-$("#startDate").on("change", function(e) {
-  refreshGraph();
-});
-$("#endDate").on("change", function(e) {
+$(".graph-input").on("change", function() {
   refreshGraph();
 });
 
@@ -10,12 +7,14 @@ function refreshGraph() {
   var endDate = $("#endDate")[0].value;
   var stationId = $("#stationDropdown")[0].value;
   if (!stationId) {
-    stationId = "GHCND:USC00040232"
+    stationId = "GHCND:USC00040232";
   }
+  var unit = $("#unitsDropdown")[0].value;
   $("#response").removeClass("invisible");
   $.ajax({
     type: "GET",
-    url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?units=standard&datasetid=GHCND&"
+    url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&"
+      + "units=" + unit + "&"
       + "stationid=" + stationId + "&"
       + "startdate=" + startDate + "&"
       + "enddate=" + endDate + "&limit=1000",
@@ -23,6 +22,7 @@ function refreshGraph() {
     success: function (res) {
       $("#errorDisplay").addClass("invisible");
       $("#response").addClass("invisible");
+      $("#chart").removeClass("invisible");
       makeArraysOfData(res.results);
     },
     error: function (xhr, status, error) {
@@ -31,14 +31,15 @@ function refreshGraph() {
     }
   });
 }
-$("#startDate")[0].value = ("2017-01-30")
-$("#endDate")[0].value = ("2017-04-30")
+$("#startDate")[0].value = ("2017-01-30");
+$("#endDate")[0].value = ("2017-04-30");
 
-refreshGraph()
+refreshGraph();
 
 function makeArraysOfData(data) {
   if (!data) {
     $("#errorDisplay").removeClass("invisible");
+    $("#chart").addClass("invisible");
     return;
   }
   var parsedData = [];
