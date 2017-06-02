@@ -1,8 +1,8 @@
 function makeGraph(data) {
   var dataArray = [
     ["date"].concat(data.dates),
-    ["MinTemps"].concat(data.minTemps),
-    ["MaxTemps"].concat(data.maxTemps)
+    ["Minimum Temperature"].concat(data.minTemps),
+    ["Maximum Temperature"].concat(data.maxTemps)
   ];
   c3.generate({
     bindto: '#chart',
