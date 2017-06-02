@@ -1,14 +1,31 @@
-$.ajax({
-  type: "GET",
-  url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&stationid=GHCND:USC00040232&startdate=2017-01-30&enddate=2017-04-30&limit=1000",
-  beforeSend: function(xhr){xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');},
-  success: function (res) {
-    makeArraysOfData(res.results);
-  },
-  error: function (xhr, status, error) {
-    console.log(error);
-  }
+$("#startDate").on("change", function(e) {
+  refreshGraph();
 });
+$("#endDate").on("change", function(e) {
+  refreshGraph();
+});
+
+function refreshGraph() {
+  var startDate = $("#startDate")[0].value;
+  var endDate = $("#endDate")[0].value;
+  $.ajax({
+    type: "GET",
+    url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&stationid=GHCND:USC00040232&"
+      + "startdate=" + startDate + "&"
+      + "enddate=" + endDate + "&limit=1000",
+    beforeSend: function(xhr){xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');},
+    success: function (res) {
+      makeArraysOfData(res.results);
+    },
+    error: function (xhr, status, error) {
+      console.log(error);
+    }
+  });
+}
+$("#startDate")[0].value = ("2017-01-30")
+$("#endDate")[0].value = ("2017-04-30")
+
+refreshGraph()
 
 function makeArraysOfData(data) {
   // console.log(data);
