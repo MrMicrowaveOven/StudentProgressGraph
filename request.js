@@ -8,6 +8,7 @@ $("#endDate").on("change", function(e) {
 function refreshGraph() {
   var startDate = $("#startDate")[0].value;
   var endDate = $("#endDate")[0].value;
+  $("#response").removeClass("invisible");
   $.ajax({
     type: "GET",
     url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&stationid=GHCND:USC00040232&"
@@ -15,9 +16,11 @@ function refreshGraph() {
       + "enddate=" + endDate + "&limit=1000",
     beforeSend: function(xhr){xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');},
     success: function (res) {
+      $("#response").addClass("invisible");
       makeArraysOfData(res.results);
     },
     error: function (xhr, status, error) {
+      $("#response").addClass("invisible");
       console.log(error);
     }
   });
