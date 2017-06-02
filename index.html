@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Climate Change!</title>
+    <title>Climate Data!</title>
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -16,7 +16,7 @@
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
     <div class="description">
-    Here is a simple graph showing climate change data from the National Centers for Environmental Information.
+    Here is a simple graph showing climate data from the National Centers for Environmental Information.
     </div>
     <div class="application">
       <label>Start Date:
@@ -40,13 +40,15 @@
       </label>
 
       <button class="button inheritFont">Blank button</button> -->
-      <div class="response invisible" id="response">Loading...</div>
-      <div class="response invisible" id="errorDisplay">Sorry, no data was found for that location during that range.</div>
+      <div class="response invisible smaller" id="response">Loading...</div>
+      <div class="response hide smaller" id="errorDisplay">Sorry, no data was found for that location during that range.</div>
       <div class="" id="chart">
       </div>
     </div>
     <br>
-    Notice that the API only updates quarterly, so as of now 4/30 is the most recent data that can be retrieved.  In addition, there are periods of missing data from their records (November 2016 is an example of this).
+    <div class="notes">
+      Notice that the API only updates quarterly, so as of now 4/30 is the most recent data that can be retrieved.  In addition, there are periods of missing data from their records (November 2016 is an example of this).
+    </div>
     <div class= "portfolioLinks" id="portfolioLinks">
       Written by Benjamin Zagorski.
       <br>

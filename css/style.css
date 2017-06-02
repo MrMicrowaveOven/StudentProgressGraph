@@ -15,6 +15,14 @@ html {
   background-size: 1700px
 }
 
+.smaller {
+  font-size: large;
+}
+
+.notes {
+  text-align: center;
+}
+
 #portfolioLinks {
   position: absolute;
   bottom: 0;

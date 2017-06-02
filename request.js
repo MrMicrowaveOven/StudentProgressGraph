@@ -20,7 +20,7 @@ function refreshGraph() {
       + "enddate=" + endDate + "&limit=1000",
     beforeSend: function(xhr){xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');},
     success: function (res) {
-      $("#errorDisplay").addClass("invisible");
+      $("#errorDisplay").addClass("hide");
       $("#response").addClass("invisible");
       $("#chart").removeClass("invisible");
       makeArraysOfData(res.results);
@@ -37,13 +37,14 @@ $("#endDate")[0].value = ("2017-04-30");
 refreshGraph();
 
 function makeArraysOfData(data) {
+  var parsedData = [];
+  var currentDateObject = {};
+  // No data for that location in that range.
   if (!data) {
     $("#errorDisplay").removeClass("invisible");
     $("#chart").addClass("invisible");
     return;
   }
-  var parsedData = [];
-  var currentDateObject = {};
   var currentDate = data[0].date;
   var dates = [];
   var minTemps = [];
@@ -60,7 +61,12 @@ function makeArraysOfData(data) {
     }
   });
   dates.push(data[data.length - 1].date.slice(0,4) + data[data.length - 1].date.slice(5,7) + data[data.length - 1].date.slice(8,10));
-
+  // There is data, but not Temperature data that matches the request.
+  if (minTemps.length === 0) {
+    $("#errorDisplay").removeClass("hide");
+    $("#chart").addClass("invisible");
+    return;
+  }
   parsedData = {
     dates: dates,
     minTemps: minTemps,
