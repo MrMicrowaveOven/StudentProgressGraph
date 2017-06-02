@@ -8,14 +8,20 @@ $("#endDate").on("change", function(e) {
 function refreshGraph() {
   var startDate = $("#startDate")[0].value;
   var endDate = $("#endDate")[0].value;
+  var stationId = $("#stationDropdown")[0].value;
+  if (!stationId) {
+    stationId = "GHCND:USC00040232"
+  }
   $("#response").removeClass("invisible");
   $.ajax({
     type: "GET",
-    url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&stationid=GHCND:USC00040232&"
+    url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&"
+      + "stationid=" + stationId + "&"
       + "startdate=" + startDate + "&"
       + "enddate=" + endDate + "&limit=1000",
     beforeSend: function(xhr){xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');},
     success: function (res) {
+      $("#errorDisplay").addClass("invisible");
       $("#response").addClass("invisible");
       makeArraysOfData(res.results);
     },
@@ -31,7 +37,10 @@ $("#endDate")[0].value = ("2017-04-30")
 refreshGraph()
 
 function makeArraysOfData(data) {
-  // console.log(data);
+  if (!data) {
+    $("#errorDisplay").removeClass("invisible");
+    return;
+  }
   var parsedData = [];
   var currentDateObject = {};
   var currentDate = data[0].date;
