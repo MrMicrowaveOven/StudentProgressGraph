@@ -20,13 +20,16 @@ function refreshGraph() {
       + "enddate=" + endDate + "&limit=1000",
     beforeSend: function(xhr){xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');},
     success: function (res) {
-      $("#errorDisplay").addClass("hide");
+      $("#noDataErrorDisplay").addClass("hide");
+      $("#invalidDateRangeErrorDisplay").addClass("hide");
       $("#response").addClass("invisible");
       $("#chart").removeClass("invisible");
       makeArraysOfData(res.results);
     },
     error: function (xhr, status, error) {
       $("#response").addClass("invisible");
+      $("#invalidDateRangeErrorDisplay").removeClass("hide");
+      $("#chart").addClass("invisible");
       console.log(error);
     }
   });
@@ -41,8 +44,7 @@ function makeArraysOfData(data) {
   var currentDateObject = {};
   // No data for that location in that range.
   if (!data) {
-    console.log("No data");
-    $("#errorDisplay").removeClass("hide");
+    $("#noDataErrorDisplay").removeClass("hide");
     $("#chart").addClass("invisible");
     return;
   }
@@ -64,7 +66,7 @@ function makeArraysOfData(data) {
   dates.push(data[data.length - 1].date.slice(0,4) + data[data.length - 1].date.slice(5,7) + data[data.length - 1].date.slice(8,10));
   // There is data, but not Temperature data that matches the request.
   if (minTemps.length === 0) {
-    $("#errorDisplay").removeClass("hide");
+    $("#noDataErrorDisplay").removeClass("hide");
     $("#chart").addClass("invisible");
     return;
   }

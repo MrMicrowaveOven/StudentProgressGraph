@@ -11,10 +11,13 @@ $.ajax({
 });
 
 function updateDropdown(stationList) {
+  var notedDate = new Date("2017-02-30")
+  var stationMaxDate;
   stationList.forEach(function(station) {
+    stationMaxDate = new Date(station.maxdate)
     if (station.id === "GHCND:USC00040232") {
       $("#stationDropdown").append("<option selected='selected' value=" + station.id + ">" + station.name + "</option>");
-    } else {
+    } else if (stationMaxDate >= notedDate) {
       $("#stationDropdown").append("<option value=" + station.id + ">" + station.name + "</option>");
     }
   });

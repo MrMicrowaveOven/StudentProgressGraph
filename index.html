@@ -25,6 +25,7 @@
       <label>End Date:
         <input class="graph-input" type="date" name="" value="" id="endDate">
       </label>
+      (Max date range 1 year)
       <label>Station:
         <select class="dropdown graph-input" name="" id="stationDropdown">
         </select>
@@ -37,7 +38,9 @@
         </select>
       </label>
       <div class="response invisible smaller" id="response">Loading...</div>
-      <div class="response hide smaller" id="errorDisplay">Sorry, no data was found for that location during that range.</div>
+      <div class="response hide smaller" id="noDataErrorDisplay">Sorry, no data was found for that location during that range.</div>
+      <div class="response hide smaller" id="invalidDateRangeErrorDisplay">Invalid date range.</div>
+      </div>
       <div class="" id="chart">
       </div>
     </div>
