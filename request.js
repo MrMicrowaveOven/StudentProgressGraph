@@ -28,9 +28,11 @@ function refreshGraph() {
     },
     error: function (xhr, status, error) {
       $("#response").addClass("invisible");
-      $("#invalidDateRangeErrorDisplay").removeClass("hide");
-      $("#chart").addClass("invisible");
-      console.log(error);
+      if (xhr.status === 400) {
+        $("#invalidDateRangeErrorDisplay").removeClass("hide");
+        $("#chart").addClass("invisible");
+      }
+      // console.log(error);
     }
   });
 }
