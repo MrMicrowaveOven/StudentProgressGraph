@@ -41,7 +41,8 @@ function makeArraysOfData(data) {
   var currentDateObject = {};
   // No data for that location in that range.
   if (!data) {
-    $("#errorDisplay").removeClass("invisible");
+    console.log("No data");
+    $("#errorDisplay").removeClass("hide");
     $("#chart").addClass("invisible");
     return;
   }
