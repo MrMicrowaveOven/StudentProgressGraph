@@ -6,32 +6,37 @@ function refreshGraph() {
   var inputData = getInputs();
   inputData.stationId = inputData.stationId || "GHCND:USC00040232";
   loading();
-  makeTempDataRequest(inputData);
+  makeTempDataRequest(inputData).then(function(tempData) {
+    displayProperGraph();
+    makeArraysOfData(tempData);
+  });
 }
 
 function makeTempDataRequest(inputData) {
-  $.ajax({
-    type: "GET",
-    url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&"
-      + "units=" + inputData.unit + "&"
-      + "stationid=" + inputData.stationId + "&"
-      + "startdate=" + inputData.startDate + "&"
-      + "enddate=" + inputData.endDate + "&limit=1000",
-    beforeSend: function(xhr){
-      xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');
-    },
-    success: function (res) {
-      displayProperGraph();
-      makeArraysOfData(res.results);
-    },
-    error: function (xhr, status, error) {
-      $("#response").addClass("invisible");
-      if (xhr.status === 400) {
-        invalidDateRangeError();
+  return new Promise(function(resolve, reject) {
+    $.ajax({
+      type: "GET",
+      url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&"
+        + "units=" + inputData.unit + "&"
+        + "stationid=" + inputData.stationId + "&"
+        + "startdate=" + inputData.startDate + "&"
+        + "enddate=" + inputData.endDate + "&limit=1000",
+      beforeSend: function(xhr){
+        xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');
+      },
+      success: function (res) {
+        resolve(res.results);
+      },
+      error: function (xhr, status, error) {
+        $("#response").addClass("invisible");
+        if (xhr.status === 400) {
+          invalidDateRangeError();
+        }
       }
-    }
+    });
   });
 }
+
 function getInputs() {
   return {
     startDate: $("#startDate")[0].value,
