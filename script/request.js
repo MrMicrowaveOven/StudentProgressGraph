@@ -84,24 +84,3 @@ function makeArraysOfData(data) {
 function parseDate(date) {
   return date.slice(0,4) + date.slice(5,7) + date.slice(8,10);
 }
-
-function loading() {
-  $("#response").removeClass("invisible");
-}
-
-function noDataError() {
-  $("#noDataErrorDisplay").removeClass("hide");
-  $("#chart").addClass("invisible");
-}
-
-function invalidDateRangeError() {
-  $("#invalidDateRangeErrorDisplay").removeClass("hide");
-  $("#chart").addClass("invisible");
-}
-
-function displayProperGraph() {
-  $("#noDataErrorDisplay").addClass("hide");
-  $("#invalidDateRangeErrorDisplay").addClass("hide");
-  $("#response").addClass("invisible");
-  $("#chart").removeClass("invisible");
-}
