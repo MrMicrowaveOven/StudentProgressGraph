@@ -8,7 +8,10 @@ function refreshGraph() {
   loading();
   makeTempDataRequest(inputData).then(function(tempData) {
     displayProperGraph();
-    makeArraysOfData(tempData);
+    var dataInArrayForm = makeArraysOfData(tempData);
+    if (dataInArrayForm) {
+      makeGraph(dataInArrayForm)
+    }
   });
 }
 
@@ -79,11 +82,11 @@ function makeArraysOfData(data) {
     noDataError();
     return;
   }
-  makeGraph({
+  return {
     dates: dates,
     minTemps: minTemps,
     maxTemps: maxTemps,
-  });
+  };
 }
 
 function parseDate(date) {
