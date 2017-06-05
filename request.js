@@ -18,7 +18,9 @@ function refreshGraph() {
       + "stationid=" + stationId + "&"
       + "startdate=" + startDate + "&"
       + "enddate=" + endDate + "&limit=1000",
-    beforeSend: function(xhr){xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');},
+    beforeSend: function(xhr){
+      xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');
+    },
     success: function (res) {
       $("#noDataErrorDisplay").addClass("hide");
       $("#invalidDateRangeErrorDisplay").addClass("hide");
@@ -55,17 +57,20 @@ function makeArraysOfData(data) {
   var minTemps = [];
   var maxTemps = [];
   data.forEach(function(dataPoint) {
-    if (dataPoint.datatype == "TMAX") {
+    if (dataPoint.datatype === "TMAX") {
       maxTemps.push(dataPoint.value);
-    } else if (dataPoint.datatype == "TMIN") {
+    } else if (dataPoint.datatype === "TMIN") {
       minTemps.push(dataPoint.value);
     }
     if (currentDate !== dataPoint.date) {
-      dates.push(currentDate.slice(0,4) + currentDate.slice(5,7) + currentDate.slice(8,10));
+      dates.push(currentDate.slice(0,4)
+      + currentDate.slice(5,7) + currentDate.slice(8,10));
       currentDate = dataPoint.date;
     }
   });
-  dates.push(data[data.length - 1].date.slice(0,4) + data[data.length - 1].date.slice(5,7) + data[data.length - 1].date.slice(8,10));
+  dates.push(data[data.length - 1].date.slice(0,4)
+  + data[data.length - 1].date.slice(5,7)
+  + data[data.length - 1].date.slice(8,10));
   // There is data, but not Temperature data that matches the request.
   if (minTemps.length === 0) {
     $("#noDataErrorDisplay").removeClass("hide");

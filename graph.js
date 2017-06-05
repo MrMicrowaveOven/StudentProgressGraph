@@ -5,10 +5,11 @@ function makeGraph(data) {
     ["Maximum Temperature"].concat(data.maxTemps)
   ];
   var units = $("#unitsDropdown")[0].value;
+  var unitAbrev;
   if (units === "standard") {
-    var unitAbrev = "F";
+    unitAbrev = "F";
   } else if (units === "metric") {
-    var unitAbrev = "C";
+    unitAbrev = "C";
   }
   c3.generate({
     bindto: '#chart',
@@ -19,7 +20,7 @@ function makeGraph(data) {
     },
     axis: {
       y: {
-        label: { // ADD
+        label: {
           text: 'Temperature (' + unitAbrev + ')',
           position: 'outer-middle'
         }
