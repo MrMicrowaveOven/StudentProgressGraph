@@ -5,29 +5,25 @@ $(".graph-input").on("change", function() {
 function refreshGraph() {
 
   var inputData = getInputs();
-
-  var startDate = inputData.startDate;
-  var endDate = inputData.endDate;
-  var stationId = inputData.stationId;
-  var unit = inputData.unit;
-
-  if (!stationId) {
-    stationId = "GHCND:USC00040232";
-  }
+  inputData.stationId = inputData.stationId || "GHCND:USC00040232";
 
   loading();
+  makeTempDataRequest(inputData);
+}
+
+function makeTempDataRequest(inputData) {
   $.ajax({
     type: "GET",
     url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&"
-      + "units=" + unit + "&"
-      + "stationid=" + stationId + "&"
-      + "startdate=" + startDate + "&"
-      + "enddate=" + endDate + "&limit=1000",
+      + "units=" + inputData.unit + "&"
+      + "stationid=" + inputData.stationId + "&"
+      + "startdate=" + inputData.startDate + "&"
+      + "enddate=" + inputData.endDate + "&limit=1000",
     beforeSend: function(xhr){
       xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');
     },
     success: function (res) {
-      displayProperGraph()
+      displayProperGraph();
       makeArraysOfData(res.results);
     },
     error: function (xhr, status, error) {
