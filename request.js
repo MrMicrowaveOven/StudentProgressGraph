@@ -4,7 +4,7 @@ $(".graph-input").on("change", function() {
 
 function refreshGraph() {
 
-  var inputData = getInputData();
+  var inputData = getInputs();
 
   var startDate = inputData.startDate;
   var endDate = inputData.endDate;
@@ -15,7 +15,7 @@ function refreshGraph() {
     stationId = "GHCND:USC00040232";
   }
 
-  $("#response").removeClass("invisible");
+  loading();
   $.ajax({
     type: "GET",
     url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&"
@@ -27,22 +27,18 @@ function refreshGraph() {
       xhr.setRequestHeader('token', 'TDslBowwDzKucWUwYmhdEiaKhBLVBmDB');
     },
     success: function (res) {
-      $("#noDataErrorDisplay").addClass("hide");
-      $("#invalidDateRangeErrorDisplay").addClass("hide");
-      $("#response").addClass("invisible");
-      $("#chart").removeClass("invisible");
+      displayProperGraph()
       makeArraysOfData(res.results);
     },
     error: function (xhr, status, error) {
       $("#response").addClass("invisible");
       if (xhr.status === 400) {
-        $("#invalidDateRangeErrorDisplay").removeClass("hide");
-        $("#chart").addClass("invisible");
+        invalidDateRangeError();
       }
     }
   });
 }
-function getInputData() {
+function getInputs() {
   return {
     startDate: $("#startDate")[0].value,
     endDate: $("#endDate")[0].value,
@@ -61,8 +57,7 @@ function makeArraysOfData(data) {
   var currentDateObject = {};
   // No data for that location in that range.
   if (!data) {
-    $("#noDataErrorDisplay").removeClass("hide");
-    $("#chart").addClass("invisible");
+    noDataError();
     return;
   }
   var currentDate = data[0].date;
@@ -87,8 +82,7 @@ function makeArraysOfData(data) {
 
   // There is data, but not Temperature data that matches the request.
   if (minTemps.length === 0) {
-    $("#noDataErrorDisplay").removeClass("hide");
-    $("#chart").addClass("invisible");
+    noDataError();
     return;
   }
   parsedData = {
@@ -98,4 +92,25 @@ function makeArraysOfData(data) {
   };
 
   makeGraph(parsedData);
+}
+
+function loading() {
+  $("#response").removeClass("invisible");
+}
+
+function noDataError() {
+  $("#noDataErrorDisplay").removeClass("hide");
+  $("#chart").addClass("invisible");
+}
+
+function invalidDateRangeError() {
+  $("#invalidDateRangeErrorDisplay").removeClass("hide");
+  $("#chart").addClass("invisible");
+}
+
+function displayProperGraph() {
+  $("#noDataErrorDisplay").addClass("hide");
+  $("#invalidDateRangeErrorDisplay").addClass("hide");
+  $("#response").addClass("invisible");
+  $("#chart").removeClass("invisible");
 }
