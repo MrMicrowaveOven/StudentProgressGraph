@@ -3,13 +3,18 @@ $(".graph-input").on("change", function() {
 });
 
 function refreshGraph() {
-  var startDate = $("#startDate")[0].value;
-  var endDate = $("#endDate")[0].value;
-  var stationId = $("#stationDropdown")[0].value;
+
+  var inputData = getInputData();
+
+  var startDate = inputData.startDate;
+  var endDate = inputData.endDate;
+  var stationId = inputData.stationId;
+  var unit = inputData.unit;
+
   if (!stationId) {
     stationId = "GHCND:USC00040232";
   }
-  var unit = $("#unitsDropdown")[0].value;
+
   $("#response").removeClass("invisible");
   $.ajax({
     type: "GET",
@@ -34,10 +39,18 @@ function refreshGraph() {
         $("#invalidDateRangeErrorDisplay").removeClass("hide");
         $("#chart").addClass("invisible");
       }
-      // console.log(error);
     }
   });
 }
+function getInputData() {
+  return {
+    startDate: $("#startDate")[0].value,
+    endDate: $("#endDate")[0].value,
+    stationId: $("#stationDropdown")[0].value,
+    unit: $("#unitsDropdown")[0].value,
+  };
+}
+
 $("#startDate")[0].value = ("2017-01-30");
 $("#endDate")[0].value = ("2017-04-30");
 
@@ -71,6 +84,7 @@ function makeArraysOfData(data) {
   dates.push(data[data.length - 1].date.slice(0,4)
   + data[data.length - 1].date.slice(5,7)
   + data[data.length - 1].date.slice(8,10));
+
   // There is data, but not Temperature data that matches the request.
   if (minTemps.length === 0) {
     $("#noDataErrorDisplay").removeClass("hide");
