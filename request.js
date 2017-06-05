@@ -3,10 +3,8 @@ $(".graph-input").on("change", function() {
 });
 
 function refreshGraph() {
-
   var inputData = getInputs();
   inputData.stationId = inputData.stationId || "GHCND:USC00040232";
-
   loading();
   makeTempDataRequest(inputData);
 }
@@ -49,8 +47,6 @@ $("#endDate")[0].value = ("2017-04-30");
 refreshGraph();
 
 function makeArraysOfData(data) {
-  var parsedData = [];
-  var currentDateObject = {};
   // No data for that location in that range.
   if (!data) {
     noDataError();
@@ -67,27 +63,26 @@ function makeArraysOfData(data) {
       minTemps.push(dataPoint.value);
     }
     if (currentDate !== dataPoint.date) {
-      dates.push(currentDate.slice(0,4)
-      + currentDate.slice(5,7) + currentDate.slice(8,10));
+      dates.push(parseDate(currentDate));
       currentDate = dataPoint.date;
     }
   });
-  dates.push(data[data.length - 1].date.slice(0,4)
-  + data[data.length - 1].date.slice(5,7)
-  + data[data.length - 1].date.slice(8,10));
+  dates.push(parseDate(data[data.length - 1].date));
 
   // There is data, but not Temperature data that matches the request.
   if (minTemps.length === 0) {
     noDataError();
     return;
   }
-  parsedData = {
+  makeGraph({
     dates: dates,
     minTemps: minTemps,
     maxTemps: maxTemps,
-  };
+  });
+}
 
-  makeGraph(parsedData);
+function parseDate(date) {
+  return date.slice(0,4) + date.slice(5,7) + date.slice(8,10);
 }
 
 function loading() {
