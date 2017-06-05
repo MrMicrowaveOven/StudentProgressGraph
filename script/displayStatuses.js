@@ -1,18 +1,18 @@
-function loading() {
+function displayLoadingStatus() {
   $("#response").removeClass("invisible");
 }
 
-function noDataError() {
+function noDataErrorStatus() {
   $("#noDataErrorDisplay").removeClass("hide");
   $("#chart").addClass("invisible");
 }
 
-function invalidDateRangeError() {
+function invalidDateRangeErrorStatus() {
   $("#invalidDateRangeErrorDisplay").removeClass("hide");
   $("#chart").addClass("invisible");
 }
 
-function displayProperGraph() {
+function displayProperGraphStatus() {
   $("#noDataErrorDisplay").addClass("hide");
   $("#invalidDateRangeErrorDisplay").addClass("hide");
   $("#response").addClass("invisible");

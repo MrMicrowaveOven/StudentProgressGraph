@@ -5,12 +5,12 @@ $(".graph-input").on("change", function() {
 function refreshGraph() {
   var inputData = getInputs();
   inputData.stationId = inputData.stationId || "GHCND:USC00040232";
-  loading();
+  displayLoadingStatus();
   makeTempDataRequest(inputData).then(function(tempData) {
-    displayProperGraph();
+    displayProperGraphStatus();
     var dataInArrayForm = makeArraysOfData(tempData);
     if (dataInArrayForm) {
-      makeGraph(dataInArrayForm)
+      makeGraph(dataInArrayForm);
     }
   });
 }
@@ -33,7 +33,7 @@ function makeTempDataRequest(inputData) {
       error: function (xhr, status, error) {
         $("#response").addClass("invisible");
         if (xhr.status === 400) {
-          invalidDateRangeError();
+          invalidDateRangeErrorStatus();
         }
       }
     });
@@ -57,7 +57,7 @@ refreshGraph();
 function makeArraysOfData(data) {
   // No data for that location in that range.
   if (!data) {
-    noDataError();
+    noDataErrorStatus();
     return;
   }
   var currentDate = data[0].date;
@@ -79,7 +79,7 @@ function makeArraysOfData(data) {
 
   // There is data, but not Temperature data that matches the request.
   if (minTemps.length === 0) {
-    noDataError();
+    noDataErrorStatus();
     return;
   }
   return {
