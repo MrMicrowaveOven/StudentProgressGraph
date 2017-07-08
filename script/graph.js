@@ -19,7 +19,7 @@ function makeGraph(data) {
   ];
   var notes = [
     "Added new target",
-    "Descision made: use prompt hierarchy V-G-M.  Use Ipad for first one and for last 9 use non-reinforcer item.  Need to confirm tactic change at next parent-teacher conference.",
+    "Decision made: use prompt hierarchy V-G-M.  Use Ipad for first one and for last 9 use non-reinforcer item.  Need to confirm tactic change at next parent-teacher conference.",
     'Teacher decision: "all" and "on", write down and use red marker for ending sound.',
     'Added generalization target'
   ];
