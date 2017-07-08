@@ -92,42 +92,49 @@ function makeGraph(data) {
       "<div class='legendBit hide' id=" + legend.date.toDateString().replace(" ", "").slice(0,6) + "><div id='dateDisplay'>" + legend.date.toDateString() + ": </div>" + legend.text + "<br>- " + legend.proctor + "<br><br></div>"
     );
   });
+  addLineHoverFunctionality();
+}
 
-  $("#chart line").hover(function(e) {
+function addLineHoverFunctionality() {
+  $("#chart text").on("mouseenter", function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
     // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
     if (dateOfHover) {
       $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
     }
-  }, function(e) {
+  });
+  $("#chart text").on("mouseleave", function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
     // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
     if (dateOfHover) {
       $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
     }
-
   });
-  $("#chart text").hover(function(e) {
+  $("#chart text").on("mouseenter", function(e) {
     // console.log(e.target.parentNode.__data__.value);
     var dateOfHover = e.target.parentNode.__data__.value;
     // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
     if (dateOfHover) {
       $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
     }
-  }, function(e) {
+  });
+  $("#chart text").on("mouseleave", function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
     // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
     if (dateOfHover) {
       $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
     }
   });
-
 }
+
+addLineHoverFunctionality();
 
 $("#showAllToggle").on("change", function() {
   if ($("#showAllToggle")[0].checked) {
     $(".legendBit").removeClass("hide");
+    $("#chart text").off('mouseenter mouseleave');
   } else {
     $(".legendBit").addClass("hide");
+    addLineHoverFunctionality();
   }
 });
