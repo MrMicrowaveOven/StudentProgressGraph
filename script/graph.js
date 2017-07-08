@@ -89,7 +89,7 @@ function makeGraph(data) {
 
   legendData.forEach(function(legend) {
     $("#legend").append(
-      "<div class='legendBit hide' id=" + legend.date.toDateString().replace(" ", "").slice(0,6) + "><div id='dateDisplay'>" + legend.date.toDateString() + ": </div>" + legend.text + "<br>- " + legend.proctor + "<br></div>"
+      "<div class='legendBit hide' id=" + legend.date.toDateString().replace(" ", "").slice(0,6) + "><div id='dateDisplay'>" + legend.date.toDateString() + ": </div>" + legend.text + "<br>- " + legend.proctor + "<br><br></div>"
     );
   });
 
@@ -107,12 +107,23 @@ function makeGraph(data) {
     // console.log(e.target.parentNode.__data__.value);
     var dateOfHover = e.target.parentNode.__data__.value;
     // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
-    $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
+    if (dateOfHover) {
+      $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
+    }
   }, function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
     // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
-    $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
-
+    if (dateOfHover) {
+      $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
+    }
   });
 
 }
+
+$("#showAllToggle").on("change", function() {
+  if ($("#showAllToggle")[0].checked) {
+    $(".legendBit").removeClass("hide");
+  } else {
+    $(".legendBit").addClass("hide");
+  }
+});
