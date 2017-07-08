@@ -1,16 +1,54 @@
 function makeGraph(data) {
   var dataArray = [
     ["date"].concat(data.dates),
-    ["Minimum Temperature"].concat(data.minTemps),
-    ["Maximum Temperature"].concat(data.maxTemps)
+    ["Susan"].concat(data.minTemps),
+    ["Bob"].concat(data.maxTemps)
   ];
-  var units = $("#unitsDropdown")[0].value;
+  var units = "standard";
   var unitAbrev;
   if (units === "standard") {
     unitAbrev = "F";
   } else if (units === "metric") {
     unitAbrev = "C";
   }
+  var dateLines = [
+    new Date("02/09/17"),
+    new Date("02/30/17"),
+    new Date("03/19/17"),
+    new Date("04/10/17"),
+  ];
+  var notes = [
+    "Added new target",
+    "Descision made: use prompt hierarchy V-G-M.  Use Ipad for first one and for last 9 use non-reinforcer item.  Need to confirm tactic change at next parent-teacher conference.",
+    'Teacher decision: "all" and "on", write down and use red marker for ending sound.',
+    'Added generalization target'
+  ];
+  var proctors = [
+    "Smith, Bob",
+    "Bulgary, Mike",
+    "Delgato, Susan",
+    "Delgato, Ally"
+  ];
+
+  var lineData = [];
+  var legendData = [];
+
+  dateLines.forEach(function(el, ind) {
+    lineData.push(
+      {
+        value: dateLines[ind],
+        text: notes[ind].slice(0, 20) + "..."
+      }
+    );
+    legendData.push(
+      {
+        date: dateLines[ind],
+        text: notes[ind],
+        proctor: proctors[ind]
+      }
+    );
+  });
+
   c3.generate({
     bindto: '#chart',
     data: {
@@ -21,7 +59,7 @@ function makeGraph(data) {
     axis: {
       y: {
         label: {
-          text: 'Temperature (' + unitAbrev + ')',
+          text: 'Percent Correct',
           position: 'outer-middle'
         }
       },
@@ -33,6 +71,48 @@ function makeGraph(data) {
         label: 'Date',
         position: 'outer-middle'
       }
-    }
+    },
+    grid: {
+      x: {
+        lines: lineData
+      },
+      // y: {
+      //   lines: [
+      //     {value: 50, text: 'Phase change'}
+      //   ]
+      // },
+    },
+    // onmouseover: function(d) {
+    //   console.log ("yo" + d);
+    // },
   });
+
+  legendData.forEach(function(legend) {
+    $("#legend").append(
+      "<div class='legendBit hide' id=" + legend.date.toDateString().replace(" ", "").slice(0,6) + "><div id='dateDisplay'>" + legend.date.toDateString() + ": </div>" + legend.text + "<br>- " + legend.proctor + "<br></div>"
+    );
+  });
+
+  $("#chart line").hover(function(e) {
+    var dateOfHover = e.target.parentNode.__data__.value;
+    // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
+    $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
+  }, function(e) {
+    var dateOfHover = e.target.parentNode.__data__.value;
+    // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
+    $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
+
+  });
+  $("#chart text").hover(function(e) {
+    // console.log(e.target.parentNode.__data__.value);
+    var dateOfHover = e.target.parentNode.__data__.value;
+    // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
+    $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
+  }, function(e) {
+    var dateOfHover = e.target.parentNode.__data__.value;
+    // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
+    $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
+
+  });
+
 }

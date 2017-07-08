@@ -16,6 +16,13 @@ function refreshGraph() {
 }
 
 function makeTempDataRequest(inputData) {
+  // inputData = {
+  //   endDate:"2017-04-30",
+  //   startDate:"2017-01-30",
+  //   stationId:"GHCND:USC00040232",
+  //   unit:"standard",
+  // };
+  // console.log(inputData);
   return new Promise(function(resolve, reject) {
     $.ajax({
       type: "GET",
@@ -42,15 +49,15 @@ function makeTempDataRequest(inputData) {
 
 function getInputs() {
   return {
-    startDate: $("#startDate")[0].value,
-    endDate: $("#endDate")[0].value,
-    stationId: $("#stationDropdown")[0].value,
-    unit: $("#unitsDropdown")[0].value,
+      endDate:"2017-04-30",
+      startDate:"2017-01-30",
+      stationId:"GHCND:USC00040232",
+      unit:"standard",
   };
 }
 
-$("#startDate")[0].value = ("2017-01-30");
-$("#endDate")[0].value = ("2017-04-30");
+// $("#startDate")[0].value = ("2017-01-30");
+// $("#endDate")[0].value = ("2017-04-30");
 
 refreshGraph();
 
