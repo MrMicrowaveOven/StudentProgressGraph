@@ -96,11 +96,15 @@ function makeGraph(data) {
   $("#chart line").hover(function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
     // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
-    $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
+    if (dateOfHover) {
+      $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
+    }
   }, function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
     // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
-    $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
+    if (dateOfHover) {
+      $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
+    }
 
   });
   $("#chart text").hover(function(e) {
