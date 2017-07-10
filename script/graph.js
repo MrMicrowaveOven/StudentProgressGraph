@@ -99,13 +99,21 @@ function addLineHoverFunctionality() {
   $("#chart text").on("mouseenter", function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
     if (dateOfHover) {
-      $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
+      if ($("#showAllToggle")[0].checked) {
+        $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
+      } else {
+        $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
+      }
     }
   });
   $("#chart text").on("mouseleave", function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
     if (dateOfHover) {
-      $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
+      if ($("#showAllToggle")[0].checked) {
+        $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
+      } else {
+        $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
+      }
     }
   });
 }
@@ -113,9 +121,7 @@ function addLineHoverFunctionality() {
 $("#showAllToggle").on("change", function() {
   if ($("#showAllToggle")[0].checked) {
     $(".legendBit").removeClass("hide");
-    $("#chart text").off('mouseenter mouseleave');
   } else {
     $(".legendBit").addClass("hide");
-    addLineHoverFunctionality();
   }
 });
