@@ -1,3 +1,4 @@
+
 function makeGraph(data) {
   var dataArray = [
     ["date"].concat(data.dates),
@@ -49,7 +50,7 @@ function makeGraph(data) {
     );
   });
 
-  c3.generate({
+  var chart = c3.generate({
     bindto: '#chart',
     data: {
       x: "date",
@@ -93,6 +94,16 @@ function makeGraph(data) {
     );
   });
   addLineHoverFunctionality();
+  chart.load({columns: {}, done: function() {
+    addShowAllNotesCheckbox();
+  }});
+}
+
+// $("#chart").ready(function() {
+//   // console.log("Yo");
+// });
+function addShowAllNotesCheckbox() {
+  $("#showAllNotesCheckbox").removeClass("hide");
 }
 
 function addLineHoverFunctionality() {
