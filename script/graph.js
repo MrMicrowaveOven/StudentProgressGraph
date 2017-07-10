@@ -98,20 +98,6 @@ function addShowAllNotesCheckbox() {
 function addLineHoverFunctionality() {
   $("#chart text").on("mouseenter", function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
-    // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
-    if (dateOfHover) {
-      $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
-    }
-  });
-  $("#chart text").on("mouseleave", function(e) {
-    var dateOfHover = e.target.parentNode.__data__.value;
-    // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
-    if (dateOfHover) {
-      $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
-    }
-  });
-  $("#chart text").on("mouseenter", function(e) {
-    var dateOfHover = e.target.parentNode.__data__.value;
     if (dateOfHover) {
       $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
     }
