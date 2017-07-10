@@ -16,13 +16,6 @@ function refreshGraph() {
 }
 
 function makeTempDataRequest(inputData) {
-  // inputData = {
-  //   endDate:"2017-04-30",
-  //   startDate:"2017-01-30",
-  //   stationId:"GHCND:USC00040232",
-  //   unit:"standard",
-  // };
-  // console.log(inputData);
   return new Promise(function(resolve, reject) {
     $.ajax({
       type: "GET",
@@ -56,9 +49,6 @@ function getInputs() {
   };
 }
 
-// $("#startDate")[0].value = ("2017-01-30");
-// $("#endDate")[0].value = ("2017-04-30");
-
 refreshGraph();
 
 function makeArraysOfData(data) {
@@ -84,7 +74,6 @@ function makeArraysOfData(data) {
   });
   dates.push(parseDate(data[data.length - 1].date));
 
-  // There is data, but not Temperature data that matches the request.
   if (minTemps.length === 0) {
     noDataErrorStatus();
     return;

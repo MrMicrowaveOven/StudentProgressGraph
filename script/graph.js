@@ -77,15 +77,7 @@ function makeGraph(data) {
       x: {
         lines: lineData
       },
-      // y: {
-      //   lines: [
-      //     {value: 50, text: 'Phase change'}
-      //   ]
-      // },
     },
-    // onmouseover: function(d) {
-    //   console.log ("yo" + d);
-    // },
   });
 
   legendData.forEach(function(legend) {
@@ -99,9 +91,6 @@ function makeGraph(data) {
   }});
 }
 
-// $("#chart").ready(function() {
-//   // console.log("Yo");
-// });
 function addShowAllNotesCheckbox() {
   $("#showAllNotesCheckbox").removeClass("hide");
 }
@@ -122,23 +111,18 @@ function addLineHoverFunctionality() {
     }
   });
   $("#chart text").on("mouseenter", function(e) {
-    // console.log(e.target.parentNode.__data__.value);
     var dateOfHover = e.target.parentNode.__data__.value;
-    // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("bolder");
     if (dateOfHover) {
       $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("hide");
     }
   });
   $("#chart text").on("mouseleave", function(e) {
     var dateOfHover = e.target.parentNode.__data__.value;
-    // $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).removeClass("bolder");
     if (dateOfHover) {
       $("#" + dateOfHover.toDateString().replace(" ", "").slice(0,6)).addClass("hide");
     }
   });
 }
-
-addLineHoverFunctionality();
 
 $("#showAllToggle").on("change", function() {
   if ($("#showAllToggle")[0].checked) {
