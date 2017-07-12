@@ -10,6 +10,9 @@
   color: red;
 }
 
+.c3-region.filled-section {
+  fill: green;
+}
 
 
 body {

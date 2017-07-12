@@ -58,8 +58,8 @@ function makeGraph(data) {
       columns: dataArray
     },
     regions: [
-      {start: dateLines[0], end: dateLines[1]},
-      {start: dateLines[2], end: dateLines[3]},
+      {start: dateLines[0], end: dateLines[1], class:"filled-section"},
+      {start: dateLines[2], end: dateLines[3], class:"filled-section"},
     ],
     axis: {
       y: {
