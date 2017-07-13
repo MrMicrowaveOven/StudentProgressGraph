@@ -41,8 +41,8 @@ html {
 }
 
 #portfolioLinks {
-  position: absolute;
-  bottom: 0;
+  /*position: absolute;
+  bottom: 0;*/
   font-size: large;
   padding: 15px 0px 20px 0px;
 }
