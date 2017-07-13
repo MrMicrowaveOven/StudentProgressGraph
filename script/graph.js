@@ -91,12 +91,13 @@ function makeGraph(data) {
   });
   addLineHoverFunctionality();
   chart.load({columns: {}, done: function() {
-    addShowAllNotesCheckbox();
+    addChartFooters();
   }});
 }
 
-function addShowAllNotesCheckbox() {
+function addChartFooters() {
   $("#showAllNotesCheckbox").removeClass("hide");
+  $("#portfolioLinks").removeClass("hide");
 }
 
 function addLineHoverFunctionality() {
